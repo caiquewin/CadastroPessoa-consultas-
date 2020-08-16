@@ -29,7 +29,7 @@ namespace SalesWebMvc.Data
 
             Especialista ep1 = new Especialista(1, "Gulacido",150, Especialidade.Ortodontia);
             Especialista ep2 = new Especialista(2, "Curuki", 175, Especialidade.Protese);
-            Especialista ep3 = new Especialista(3, "Nepun", 200, Especialidade.Ortodontia);
+            Especialista ep3 = new Especialista(3, "Nepun", 200, Especialidade.Implante);
 
             
 
