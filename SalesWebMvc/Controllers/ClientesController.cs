@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using SalesWebMvc.Data;
 using SalesWebMvc.Models;
+using SalesWebMvc.Services;
 
 namespace SalesWebMvc.Controllers
 {
@@ -14,6 +15,10 @@ namespace SalesWebMvc.Controllers
     {
         private readonly SalesWebMvcContext _context;
 
+        public ClientesController()
+        {
+
+        }
         public ClientesController(SalesWebMvcContext context)
         {
             _context = context;
