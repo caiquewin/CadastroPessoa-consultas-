@@ -15,9 +15,8 @@ namespace SalesWebMvc.Models
         {
 
         }
-        public Cliente(int id, string nome, DateTime dataNasci, int numeCel)
+        public Cliente(string nome, DateTime dataNasci, int numeCel)
         {
-            Id = id;
             Nome = nome;
             DataNasci = dataNasci;
             NumeCel = numeCel;

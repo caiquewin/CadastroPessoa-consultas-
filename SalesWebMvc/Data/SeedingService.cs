@@ -14,7 +14,7 @@ namespace SalesWebMvc.Data
         {
             _context = context;
         }
-        public void Seed()//opração pra popular nossa table
+        /*public void Seed()//opração pra popular nossa table
         {
         if (_context.Especialista.Any() ||_context.Cliente.Any()|| _context.Consulta.Any() )
            //esse if vai verificar se tem algum dado no banco de dados(nas tables)
@@ -55,7 +55,7 @@ namespace SalesWebMvc.Data
             _context.Especialista.AddRange(ep1, ep2, ep3);
             _context.Consulta.AddRange(cn1, cn2, cn3, cn4, cn5, cn6, cn7, cn8, cn9, cn10, cn11, cn12, cn13, cn14, cn15);
             _context.SaveChanges();
-        }
+        }*/
     }
 }
 

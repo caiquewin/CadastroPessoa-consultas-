@@ -1,0 +1,30 @@
+﻿@model SalesWebMvc.Models.Especialista
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h2>Novo Especialista</h2>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+     
+            <div class="form-group">
+                <label asp-for="NomeDoutor" class="control-label"></label>
+                <input asp-for="NomeDoutor" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="especialidade" class=" control-label"></label>
+                <input asp-for="especialidade" class="form-control" />
+            </div>
+            <div class=" form-group">
+                <label asp-for="Salario" class="control-label"></label>
+                <input asp-for="Salario" class="form-control" />
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Salvar" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+

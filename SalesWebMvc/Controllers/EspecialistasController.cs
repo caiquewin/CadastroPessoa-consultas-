@@ -21,5 +21,16 @@ namespace SalesWebMvc.Controllers
             var list = _especialistaService.FindAll();
             return View(list);
         }
+        public IActionResult Create()// ação pra criar um Especialista novo (
+        {
+            return View();
+        }
+        [HttpPost]//estou indicando que ação é uma ação de POST não de GET
+        [ValidateAntiForgeryToken]//prevenção contra ataques (CSRF)
+        public IActionResult Create(Especialista especialista)
+        {
+            _especialistaService.Insert(especialista);
+            return RedirectToAction(nameof(Index));
+        }
     }
 }
