@@ -13,21 +13,36 @@
     <thead>
         <tr>
             <th>
+                @Html.DisplayNameFor(model =>model.Id)
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.Nome)
             </th>
-            <th></th>
+            <th>
+                @Html.DisplayNameFor(model =>model.DataNasci)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model =>model.NumeCel)
+            </th>
         </tr>
     </thead>
     <tbody>
 @foreach (var item in Model) {
         <tr>
             <td>
+                @Html.DisplayFor(modelId =>item.Id)
+            </td>
+            <td>
                 @Html.DisplayFor(modelItem => item.Nome)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                @Html.DisplayFor(modelNome => item.Nome)
+            </td>
+            <td>
+                @Html.DisplayFor(modelDataNasci =>item.DataNasci)
+            </td>
+            <td>
+                @Html.DisplayFor(modelNumeCel =>item.NumeCel)
             </td>
         </tr>
 }

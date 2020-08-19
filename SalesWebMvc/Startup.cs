@@ -42,6 +42,7 @@ namespace SalesWebMvc
                         builder.MigrationsAssembly("SalesWebMvc")));
             services.AddScoped<SeedingService>();// injeção de dependencia da nossa "SeedingService"
             services.AddScoped<EspecialistaService>();// Injeção d dependência da nossa classe ClienteService
+            services.AddScoped<ClienteService>();
         }
 
         // Estem método é a solicitação HTTP
@@ -50,7 +51,7 @@ namespace SalesWebMvc
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-               // seedingService.Seed();
+               seedingService.Seed();
             }
             else
             {

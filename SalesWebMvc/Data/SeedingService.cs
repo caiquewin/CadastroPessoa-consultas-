@@ -14,18 +14,18 @@ namespace SalesWebMvc.Data
         {
             _context = context;
         }
-        /*public void Seed()//opração pra popular nossa table
+        public void Seed()//opração pra popular nossa table
         {
         if (_context.Especialista.Any() ||_context.Cliente.Any()|| _context.Consulta.Any() )
            //esse if vai verificar se tem algum dado no banco de dados(nas tables)
             {
                 return;// 
             }
-            Cliente c1 = new Cliente(1, "Fátima Juliana Pereira", new DateTime(1980, 02, 24), 986569882);
-            Cliente c2 = new Cliente(2, "Caleb Luan Carlos Eduardo Carvalho", new DateTime(1998, 06, 09), 925734318);
-            Cliente c3 = new Cliente(3, "Raimundo Jorge Gael Assunção", new DateTime(1985, 09, 12), 986569882);
-            Cliente c4 = new Cliente(4, "Cristiane Gabrielly Débora Pereira", new DateTime(1981, 05, 12), 991858647);
-            Cliente c5 = new Cliente(5, "Fátima Juliana Pereira", new DateTime(1999, 12, 24), 986569882);
+            Cliente c1 = new Cliente( "Fátima Juliana Pereira", new DateTime(1980, 02, 24), 986569882);
+            Cliente c2 = new Cliente( "Caleb Luan Carlos Eduardo Carvalho", new DateTime(1998, 06, 09), 925734318);
+            Cliente c3 = new Cliente( "Raimundo Jorge Gael Assunção", new DateTime(1985, 09, 12), 986569882);
+            Cliente c4 = new Cliente( "Cristiane Gabrielly Débora Pereira", new DateTime(1981, 05, 12), 991858647);
+            Cliente c5 = new Cliente( "Fátima Juliana Pereira", new DateTime(1999, 12, 24), 986569882);
 
             Especialista ep1 = new Especialista(1, "Gulacido",150, Especialidade.Ortodontia);
             Especialista ep2 = new Especialista(2, "Curuki", 175, Especialidade.Protese);
@@ -55,7 +55,7 @@ namespace SalesWebMvc.Data
             _context.Especialista.AddRange(ep1, ep2, ep3);
             _context.Consulta.AddRange(cn1, cn2, cn3, cn4, cn5, cn6, cn7, cn8, cn9, cn10, cn11, cn12, cn13, cn14, cn15);
             _context.SaveChanges();
-        }*/
+        }
     }
 }
 

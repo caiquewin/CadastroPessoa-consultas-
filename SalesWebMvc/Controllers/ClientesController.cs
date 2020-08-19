@@ -13,32 +13,28 @@ namespace SalesWebMvc.Controllers
 {
     public class ClientesController : Controller
     {
-        private readonly SalesWebMvcContext _context;
-
-        public ClientesController()
+        private readonly ClienteService _especialistaSerivce;
+        public ClientesController(ClienteService clienteService)
         {
-
-        }
-        public ClientesController(SalesWebMvcContext context)
-        {
-            _context = context;
+            _especialistaSerivce= clienteService;
         }
 
         // GET: Clientes
-        public async Task<IActionResult> Index()
+        public  IActionResult Index()
         {
-            return View(await _context.Cliente.ToListAsync());
+            var list = _especialistaSerivce.FindAll();
+            return View(list);
         }
 
         // GET: Clientes/Details/5
-        public async Task<IActionResult> Details(int? id)
+      /*  public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var cliente = await _context.Cliente
+            var cliente = await _especialistaService.Cliente
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (cliente == null)
             {
@@ -59,7 +55,7 @@ namespace SalesWebMvc.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name")] Cliente cliente)
+        public async Task<IActionResult> Create([Bind("Id,Name,DataNasci")] Cliente cliente, Cliente DataNasci)
         {
             if (ModelState.IsValid)
             {
@@ -153,6 +149,6 @@ namespace SalesWebMvc.Controllers
         private bool ClienteExists(int id)
         {
             return _context.Cliente.Any(e => e.Id == id);
-        }
+        }*/
     }
 }
