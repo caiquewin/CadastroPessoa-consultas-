@@ -14,7 +14,7 @@ namespace SalesWebMvc.Services
         {
             _context = context;
         }
-        public List<Cliente>FindAll()
+        public List<Cliente>FindAll()//operação sicrona
         {
             return _context.Cliente.ToList();
         }

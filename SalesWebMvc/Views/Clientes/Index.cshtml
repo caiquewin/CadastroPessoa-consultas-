@@ -9,39 +9,41 @@
 <p>
     <a asp-action="Create" class="btn btn-default">Novo Cliente</a>
 </p>
-<table class="table table-striped">
+<table class="table table-striped table-responsive table-hover">
     <thead>
-        <tr>
+        <tr class="info">
             <th>
-                @Html.DisplayNameFor(model =>model.Id)
+                @Html.DisplayNameFor(model => model.Id)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Nome)
             </th>
             <th>
-                @Html.DisplayNameFor(model =>model.DataNasci)
+                @Html.DisplayNameFor(model => model.DataNasci)
             </th>
             <th>
-                @Html.DisplayNameFor(model =>model.NumeCel)
+                @Html.DisplayNameFor(model => model.NumeCel)
             </th>
         </tr>
     </thead>
+    
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelId =>item.Id)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Nome)
-            </td>
-            <td>
-                @Html.DisplayFor(modelDataNasci =>item.DataNasci)
-            </td>
-            <td>
-                @Html.DisplayFor(modelNumeCel =>item.NumeCel)
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelId => item.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nome)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelDataNasci => item.DataNasci)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelNumeCel => item.NumeCel)
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
