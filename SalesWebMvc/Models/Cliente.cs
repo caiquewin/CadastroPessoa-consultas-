@@ -10,20 +10,18 @@ namespace SalesWebMvc.Models
         public string Nome { get; set; }
         public DateTime DataNasci { get; set; }
         public int NumeCel { get; set; }
-        public string  Cpf { get; set; }
         public ICollection<Consulta> Consultas { get; set; } = new List<Consulta>();
         public Cliente()
         {
 
         }
 
-        public Cliente(int id, string nome, DateTime dataNasci, int numeCel, string cpf)
+        public Cliente(int id, string nome, DateTime dataNasci, int numeCel)
         {
             Id = id;
             Nome = nome;
             DataNasci = dataNasci;
             NumeCel = numeCel;
-            Cpf = cpf;
         }
 
         public void AddConsulta(Consulta consulta)// adicionar consulta

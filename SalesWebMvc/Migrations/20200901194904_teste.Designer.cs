@@ -9,8 +9,8 @@ using SalesWebMvc.Data;
 namespace SalesWebMvc.Migrations
 {
     [DbContext(typeof(SalesWebMvcContext))]
-    [Migration("20200901180608_AdicionadoDepartamento")]
-    partial class AdicionadoDepartamento
+    [Migration("20200901194904_teste")]
+    partial class teste
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -23,8 +23,6 @@ namespace SalesWebMvc.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
-
-                    b.Property<string>("Cpf");
 
                     b.Property<DateTime>("DataNasci");
 

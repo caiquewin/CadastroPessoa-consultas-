@@ -17,6 +17,7 @@ namespace SalesWebMvc.Services
         public List<Cliente>FindAll()//operação sicrona
         {
             return _context.Cliente.ToList();
+
         }
         public void Insert(Cliente obj)
         {

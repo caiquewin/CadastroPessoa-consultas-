@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace SalesWebMvc.Migrations
 {
-    public partial class ClassesArrumadas : Migration
+    public partial class teste : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -24,18 +24,39 @@ namespace SalesWebMvc.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Departamento",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    Nome = table.Column<string>(nullable: true),
+                    Salario = table.Column<double>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Departamento", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Especialista",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    NomeDoutor = table.Column<string>(nullable: true),
-                    Salario = table.Column<double>(nullable: false),
-                    especialidade = table.Column<int>(nullable: false)
+                    Cro = table.Column<int>(nullable: false),
+                    CroEstado = table.Column<string>(nullable: true),
+                    Nome = table.Column<string>(nullable: true),
+                    DepartamentoId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Especialista", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Especialista_Departamento_DepartamentoId",
+                        column: x => x.DepartamentoId,
+                        principalTable: "Departamento",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -76,6 +97,11 @@ namespace SalesWebMvc.Migrations
                 name: "IX_Consulta_EspecialistaId",
                 table: "Consulta",
                 column: "EspecialistaId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Especialista_DepartamentoId",
+                table: "Especialista",
+                column: "DepartamentoId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -88,6 +114,9 @@ namespace SalesWebMvc.Migrations
 
             migrationBuilder.DropTable(
                 name: "Especialista");
+
+            migrationBuilder.DropTable(
+                name: "Departamento");
         }
     }
 }

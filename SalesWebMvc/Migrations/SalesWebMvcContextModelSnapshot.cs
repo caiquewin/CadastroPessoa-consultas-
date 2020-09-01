@@ -22,8 +22,6 @@ namespace SalesWebMvc.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("Cpf");
-
                     b.Property<DateTime>("DataNasci");
 
                     b.Property<string>("Nome");
