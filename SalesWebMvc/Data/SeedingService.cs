@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace SalesWebMvc.Data
 {
-    public class SeedingService
+    /*public class SeedingService
     {
         private SalesWebMvcContext _context;
         public SeedingService(SalesWebMvcContext context)
@@ -56,6 +56,6 @@ namespace SalesWebMvc.Data
             _context.Consulta.AddRange(cn1, cn2, cn3, cn4, cn5, cn6, cn7, cn8, cn9, cn10, cn11, cn12, cn13, cn14, cn15);
             _context.SaveChanges();
         }
-    }
+    }*/
 }
 

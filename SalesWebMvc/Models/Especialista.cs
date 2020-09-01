@@ -9,19 +9,27 @@ namespace SalesWebMvc.Models
     public class Especialista
     {
         public int Id { get; set; }
-        public string NomeDoutor { get; set; }
-        public double Salario { get; set; }
-        public Especialidade especialidade { get; set; }
+        public int Cro { get; set; }
+        public string CroEstado { get; set; }
+        public string Nome { get; set; }
+        public Departamento Departamento { get; set; }
+        public ICollection<Consulta> Consultas { get; set; } = new List<Consulta>();
         public Especialista()
         {
         }
-        public Especialista(int id,string nomeDoutor,double salario, Especialidade especialidade)
+
+        public Especialista(int id, int cro, string croEstado, string nome, Departamento departamento)
         {
             Id = id;
-            NomeDoutor = nomeDoutor;
-            Salario = salario;
-            this.especialidade = especialidade;
+            Cro = cro;
+            CroEstado = croEstado;
+            Nome = nome;
+            Departamento = departamento;
         }
-         
+        public double TotalConsulta(DateTime inicial, DateTime final)
+        {
+            return Consultas.Where(sr => sr.Data >= inicial && sr.Data <= final).Sum(item => item.Id);
+        }
+
     }
 }

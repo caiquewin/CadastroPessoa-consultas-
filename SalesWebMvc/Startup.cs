@@ -40,18 +40,18 @@ namespace SalesWebMvc
             services.AddDbContext<SalesWebMvcContext>(options =>
                     options.UseMySql(Configuration.GetConnectionString("SalesWebMvcContext"), builder =>
                         builder.MigrationsAssembly("SalesWebMvc")));
-            services.AddScoped<SeedingService>();// injeção de dependencia da nossa "SeedingService"
+            //services.AddScoped<SeedingService>();// injeção de dependencia da nossa "SeedingService"
             services.AddScoped<EspecialistaService>();// Injeção d dependência da nossa classe ClienteService
             services.AddScoped<ClienteService>();
         }
 
         // Estem método é a solicitação HTTP
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env,SeedingService  seedingService)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env/*SeedingService  seedingService*/)
         {
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-               seedingService.Seed();
+              // seedingService.Seed();
             }
             else
             {

@@ -19,7 +19,7 @@ namespace SalesWebMvc.Models
 
         }
 
-        public Consulta(int id, DateTime data, StatusPagamento statusPagamento, string comentario,Especialista especialista,Cliente cliente)
+        public Consulta(int id, DateTime data, StatusPagamento statusPagamento, string comentario, Especialista especialista, Cliente cliente)
         {
             Id = id;
             Data = data;
