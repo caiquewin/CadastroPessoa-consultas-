@@ -13,6 +13,6 @@ namespace SalesWebMvc.Data
         public DbSet<Cliente> Cliente{ get; set; }
         public DbSet<Consulta> Consulta { get; set; }
         public DbSet<Especialista> Especialista{ get; set; }
-        public DbSet<SalesWebMvc.Models.Departamento> Departamento { get; set; }
+        public DbSet<Departamento> Departamento { get; set; }
     }
 }
