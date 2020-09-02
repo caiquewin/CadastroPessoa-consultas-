@@ -18,11 +18,12 @@ namespace SalesWebMvc.Services
         {
             return _contex.Especialista.ToList();
         }
-        public void Insert(Especialista obj)//adiciona um novo Especialista do Create.cshtml dela envia pra esse metodo e vai pro BD
+
+       /* public void Insert(Especialista obj)//adiciona um novo Especialista do Create.cshtml dela envia pra esse metodo e vai pro BD
         {
             _contex.Add(obj);
             _contex.SaveChanges();
-        }
+        }*/
             
     }
 }

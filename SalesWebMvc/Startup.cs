@@ -41,8 +41,8 @@ namespace SalesWebMvc
                     options.UseMySql(Configuration.GetConnectionString("SalesWebMvcContext"), builder =>
                         builder.MigrationsAssembly("SalesWebMvc")));
             services.AddScoped<SeedingService>();// injeção de dependencia da nossa "SeedingService"
-           // services.AddScoped<EspecialistaService>();// Injeção d dependência da nossa classe ClienteService
-           // services.AddScoped<ClienteService>();
+            services.AddScoped<EspecialistaService>();// Injeção d dependência da nossa classe ClienteService
+            services.AddScoped<ClienteService>();
         }
 
         // Estem método é a solicitação HTTP
