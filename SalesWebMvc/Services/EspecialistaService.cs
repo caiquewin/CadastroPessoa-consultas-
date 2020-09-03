@@ -24,6 +24,15 @@ namespace SalesWebMvc.Services
             _contex.Add(obj);
             _contex.SaveChanges();
         }
-            
+        public Especialista FindById(int Id)
+        {
+            return _contex.Especialista.FirstOrDefault(obj => obj.Id == Id);
+        }
+        public void Remove(int Id)
+        {
+            var obj = _contex.Especialista.Find(Id);
+            _contex.Especialista.Remove(obj);
+            _contex.SaveChanges();
+        }
     }
 }

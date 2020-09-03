@@ -23,7 +23,7 @@ namespace SalesWebMvc.Controllers
         public IActionResult Create()
         {
             var departamentos = _departamentoService.FindAll();
-            var viewModel = new EspecialistaFormViewModel { Departamentos = departamentos };
+            var viewModel = new EspecialistaFormViewModel { Departamento = departamentos };
             return View(viewModel);
         }
 
@@ -32,6 +32,26 @@ namespace SalesWebMvc.Controllers
         public IActionResult Create(Especialista especialista)
         {
             _especialistaService.Insert(especialista);
+            return RedirectToAction(nameof(Index));
+        }
+        public IActionResult Delete(int? id)
+        {
+            if(id ==null)
+            {
+                return NotFound();
+            }
+            var obj = _especialistaService.FindById(id.Value);
+            if(obj == null)
+            {
+                return NotFound();
+            }
+            return View(obj);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Delete(int id)
+        {
+            _especialistaService.Remove(id);
             return RedirectToAction(nameof(Index));
         }
     }
