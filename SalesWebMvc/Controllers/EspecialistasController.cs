@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using SalesWebMvc.Models;
 using SalesWebMvc.Services;
 
 namespace SalesWebMvc.Controllers
@@ -16,6 +17,18 @@ namespace SalesWebMvc.Controllers
         {
             var list = _especialistaService.FindAll();
             return View(list);
+        }
+        public IActionResult Create()
+        {
+            return View();
+        }
+
+        [HttpPost] //anotação que o método abaixo é um post
+        [ValidateAntiForgeryToken]
+        public IActionResult Create(Especialista especialista)
+        {
+            _especialistaService.Insert(especialista);
+            return RedirectToAction(nameof(Index));
         }
     }
 }
