@@ -1,16 +1,18 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SalesWebMvc.Models;
 using SalesWebMvc.Services;
+using SalesWebMvc.Models.ViewModels;
 
 namespace SalesWebMvc.Controllers
 {
     public class EspecialistasController : Controller
     {
         private readonly EspecialistaService _especialistaService;
-
-        public EspecialistasController(EspecialistaService especialistaService)
+        private readonly DepartamentoService _departamentoService;
+        public EspecialistasController(EspecialistaService especialistaService, DepartamentoService departamentoService)
         {
             _especialistaService = especialistaService;
+            _departamentoService = departamentoService;
         }
 
         public IActionResult Index()
@@ -20,7 +22,9 @@ namespace SalesWebMvc.Controllers
         }
         public IActionResult Create()
         {
-            return View();
+            var departamentos = _departamentoService.FindAll();
+            var viewModel = new EspecialistaFormViewModel { Departamentos = departamentos };
+            return View(viewModel);
         }
 
         [HttpPost] //anotação que o método abaixo é um post
