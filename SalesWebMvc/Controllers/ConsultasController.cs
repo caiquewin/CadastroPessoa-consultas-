@@ -22,7 +22,7 @@ namespace SalesWebMvc.Controllers
         // GET: Consultas
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Consulta.ToListAsync());
+            return View(await _context.Consulta.Include(obj =>obj.Especialista).Include(cli =>cli.Cliente).ToListAsync());
         }
 
         // GET: Consultas/Details/5

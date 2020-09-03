@@ -1,4 +1,6 @@
-﻿using SalesWebMvc.Data;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using SalesWebMvc.Data;
 using SalesWebMvc.Models;
 using System;
 using System.Collections.Generic;
@@ -16,7 +18,7 @@ namespace SalesWebMvc.Services
         }
         public List<Especialista> FindAll()//operação sincrona 
         {
-            return _contex.Especialista.ToList();
+            return _contex.Especialista.Include(obj =>obj.Departamento).ToList();
         }
 
        public void Insert(Especialista obj)//adiciona um novo Especialista do Create.cshtml dela envia pra esse metodo e vai pro BD
@@ -26,7 +28,7 @@ namespace SalesWebMvc.Services
         }
         public Especialista FindById(int Id)
         {
-            return _contex.Especialista.FirstOrDefault(obj => obj.Id == Id);
+            return _contex.Especialista.Include(obj =>obj.Departamento).FirstOrDefault(obj => obj.Id == Id);
         }
         public void Remove(int Id)
         {
@@ -34,5 +36,6 @@ namespace SalesWebMvc.Services
             _contex.Especialista.Remove(obj);
             _contex.SaveChanges();
         }
+        
     }
 }
