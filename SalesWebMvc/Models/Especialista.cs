@@ -13,6 +13,7 @@ namespace SalesWebMvc.Models
         public string CroEstado { get; set; }
         public string Nome { get; set; }
         public Departamento Departamento { get; set; }
+        public int DepartamentoId { get; set; }
         public ICollection<Consulta> Consultas { get; set; } = new List<Consulta>();
         public Especialista()
         {

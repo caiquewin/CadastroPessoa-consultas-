@@ -21,6 +21,7 @@ namespace SalesWebMvc.Services
 
        public void Insert(Especialista obj)//adiciona um novo Especialista do Create.cshtml dela envia pra esse metodo e vai pro BD
         {
+            obj.Departamento = _contex.Departamento.First();
             _contex.Add(obj);
             _contex.SaveChanges();
         }
