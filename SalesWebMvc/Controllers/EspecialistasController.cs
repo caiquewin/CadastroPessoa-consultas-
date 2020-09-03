@@ -2,6 +2,8 @@
 using SalesWebMvc.Models;
 using SalesWebMvc.Services;
 using SalesWebMvc.Models.ViewModels;
+using System.Collections.Generic;
+using SalesWebMvc.Services.Exceptions;
 
 namespace SalesWebMvc.Controllers
 {
@@ -67,6 +69,43 @@ namespace SalesWebMvc.Controllers
             }
             return View(obj);
 
+        }
+        public IActionResult Edit(int? id)
+        {
+             if(id == null)
+            {
+                return NotFound();
+            }
+            var obj = _especialistaService.FindById(id.Value);
+            if(obj == null)
+            {
+                return NotFound();
+            }
+            List<Departamento> departamentos = _departamentoService.FindAll();
+            EspecialistaFormViewModel viewModel = new EspecialistaFormViewModel { Especialista = obj, Departamento = departamentos } ;
+            return View(viewModel);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Edit(int id,Especialista especialista)
+        {
+            if   (id != especialista.Id)
+            {
+                return BadRequest();
+            }
+            try
+            {
+                _especialistaService.Update(especialista);
+                return RedirectToAction(nameof(Index));
+            }
+            catch(NotFoundException)
+            {
+                return NotFound();
+            }
+            catch(DbConcurrencyException)
+            {
+                return BadRequest();
+            }
         }
     }
 }

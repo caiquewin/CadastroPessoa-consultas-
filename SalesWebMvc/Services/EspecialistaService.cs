@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using SalesWebMvc.Data;
 using SalesWebMvc.Models;
+using SalesWebMvc.Services.Exceptions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -35,6 +36,24 @@ namespace SalesWebMvc.Services
             var obj = _contex.Especialista.Find(Id);
             _contex.Especialista.Remove(obj);
             _contex.SaveChanges();
+        }
+        public void Update(Especialista obj)
+        {
+            if(!_contex.Especialista.Any(x => x.Id == obj.Id))// verificando se tem algum usuário com esse id no bd
+            {
+                throw new NotFoundException("Usuario não encontrado");
+            }
+            try
+            {
+                _contex.Update(obj);
+                _contex.SaveChanges();
+            }
+            catch (DbConcurrencyException e)
+            {
+
+                throw new DbConcurrencyException(e.Message);
+            }
+            
         }
         
     }
