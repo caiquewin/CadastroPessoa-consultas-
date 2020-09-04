@@ -12,11 +12,19 @@ namespace SalesWebMvc.Models
     {
         public int Id { get; set; }
 
+        [Required(ErrorMessage ="{0} Obrigatório")]
         [Display(Name = "Numero Do Cro")]//Nome Exibido pro usuário
         public int Cro { get; set; }
+
+        [Required(ErrorMessage ="{0} Obrigatório")]
         [Display(Name = "Estado do Cro")]
+        [StringLength(2,MinimumLength =2,ErrorMessage ="{0} Coloque o estado que foi retirado seu Cro")]
         public string CroEstado { get; set; }
+
+        [Required(ErrorMessage = "{0} Obrigatório")]
         public string Nome { get; set; }
+
+        [Required]
         [Display(Name ="Especialidade")]
         public Departamento Departamento { get; set; }
         public int DepartamentoId { get; set; }

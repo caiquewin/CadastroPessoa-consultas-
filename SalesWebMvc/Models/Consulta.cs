@@ -10,10 +10,12 @@ namespace SalesWebMvc.Models
     public class Consulta
     {
         public int Id { get; set; }
+
         [Display(Name = "Data e Hora")]
         [DataType(DataType.DateTime)]
         [DisplayFormat(DataFormatString ="{0: dd/MM/yyyy HH:mm}")]
         public DateTime Data { get; set; }
+
         [Display(Name ="Status do Pagamento")]
         public StatusPagamento StatusPagamento { get; set; }
         public string Comentario { get; set; }

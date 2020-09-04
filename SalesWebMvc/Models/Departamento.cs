@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json.Serialization;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -9,9 +10,16 @@ namespace SalesWebMvc.Models
     public class Departamento
     {
         public int Id { get; set; }
+
+        [Required(ErrorMessage = "{0} Obrigatório")]
+        [StringLength(20,MinimumLength =2, ErrorMessage ="{0} está acima de 15 Letras")]
         public String Nome { get; set; }
-        [DisplayFormat(DataFormatString ="{0:F2}")]
+
+        [Display(Name ="Salário")]//definando o campo de leitura pro user
+        [DisplayFormat(DataFormatString ="{0:F2}")]// definindo quantidade de casas decimais
+        [Required(ErrorMessage ="{0} Obrigatório")]// definindo que o Salario o campo é obrigatório
         public double Salario { get; set; }
+
         public ICollection<Especialista>Especialistas{ get; set; }= new List<Especialista>();
         public Departamento()
         {
