@@ -1,11 +1,9 @@
 ﻿@model SalesWebMvc.Models.Cliente
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Novo Cliente";
 }
 
-<h2>Novo Cliente</h2>
-
-<h2>Cliente</h2>
+<h2>@ViewData["Title"]</h2>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -23,7 +21,7 @@
                 <input asp-for="NumeCel" class="form-control" />
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <input type="submit" value="Enviar" class="btn btn-default" />
 
             </div>
 
@@ -32,6 +30,6 @@
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index">Voltar</a>
 </div>
 

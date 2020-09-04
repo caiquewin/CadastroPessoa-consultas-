@@ -1,11 +1,11 @@
 ﻿@model IEnumerable<SalesWebMvc.Models.Especialista>
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Especialistas";
 }
 
-<h2>Lista de especialistas</h2>
+<h2>@ViewData["Title"]</h2>
 <p>
-    <a asp-action="Create" class="btn btn-default">Criar</a>
+    <a asp-action="Create" class="btn btn-default">Novo Especialista</a>
 </p>
 <table class="table table-striped table-hover">
     <thead>
@@ -27,7 +27,7 @@
             </th>
         </tr>
     </thead>
-    <tbody>
+    <tbody >
         @foreach (var item in Model)
         {
         <tr>

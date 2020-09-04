@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 
 namespace SalesWebMvc.Models
@@ -8,7 +9,9 @@ namespace SalesWebMvc.Models
     {
         public int Id { get; set; }
         public string Nome { get; set; }
+        [Display(Name ="Data de Nascimento")]
         public DateTime DataNasci { get; set; }
+        [Display (Name ="Telefone")]
         public int NumeCel { get; set; }
         public ICollection<Consulta> Consultas { get; set; } = new List<Consulta>();
         public Cliente()

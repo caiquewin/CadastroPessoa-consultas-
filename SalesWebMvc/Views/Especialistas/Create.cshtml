@@ -1,12 +1,11 @@
 ﻿@model SalesWebMvc.Models.ViewModels.EspecialistaFormViewModel;
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Novo Especialista";
 }
 
-<h2>Adicionar um novo especialista</h2>
+<h2>@ViewData["Title"]</h2>
 
-<h4>Adicionar</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -34,3 +33,4 @@
         </form>
     </div>
 </div>
+<a asp-action="Index">Voltar</a>
