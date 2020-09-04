@@ -9,9 +9,13 @@ namespace SalesWebMvc.Models
     {
         public int Id { get; set; }
         public string Nome { get; set; }
-        [Display(Name ="Data de Nascimento")]
+
+        [Display(Name ="Data de Nascimento")]//descrição
+        [DataType(DataType.Date)]//tipoe
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")]//formato de exibição
         public DateTime DataNasci { get; set; }
-        [Display (Name ="Telefone")]
+        
+        [Display (Name ="Numero para Contato")]        
         public int NumeCel { get; set; }
         public ICollection<Consulta> Consultas { get; set; } = new List<Consulta>();
         public Cliente()

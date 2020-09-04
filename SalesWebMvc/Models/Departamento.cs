@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -9,6 +10,7 @@ namespace SalesWebMvc.Models
     {
         public int Id { get; set; }
         public String Nome { get; set; }
+        [DisplayFormat(DataFormatString ="{0:F2}")]
         public double Salario { get; set; }
         public ICollection<Especialista>Especialistas{ get; set; }= new List<Especialista>();
         public Departamento()
