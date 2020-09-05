@@ -36,7 +36,7 @@ namespace SalesWebMvc.Controllers
             if (!ModelState.IsValid)
             {
                 var clien = _clienteService.FindAll();
-                var viewModel = new EspecialistaFormViewModel { Cliente=clien };
+                var viewModel = new ConsultaFormViewModel { Cliente=clien };
                 return View(viewModel);
             }
             _clienteService.Insert(cliente);

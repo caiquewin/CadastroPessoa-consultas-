@@ -46,6 +46,7 @@ namespace SalesWebMvc
             services.AddScoped<SeedingService>();// injeção de dependencia da nossa "SeedingService"
             services.AddScoped<EspecialistaService>();// Injeção d dependência da nossa classe ClienteService
             services.AddScoped<ClienteService>();
+            services.AddScoped<ConsultaService>();
             services.AddScoped<DepartamentoService>();
         }
 

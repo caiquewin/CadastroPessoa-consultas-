@@ -15,9 +15,18 @@ namespace SalesWebMvc.Services
         {
             _context = context;
         }
+
         public List<Consulta>FindAll()
         {
             return _context.Consulta.Include(obj => obj.Especialista).Include(obj =>obj.Cliente).ToList();
         }
+        public void Insert(Consulta obj)
+        {
+            var a = Models.Enums.StatusPagamento.Efetuado;
+            obj.StatusPagamento=a;
+            _context.Add(obj);
+            _context.SaveChanges();
+        }
+        
     }
 }
