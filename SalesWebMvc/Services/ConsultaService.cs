@@ -1,4 +1,6 @@
-﻿using SalesWebMvc.Data;
+﻿using Microsoft.EntityFrameworkCore;
+using SalesWebMvc.Data;
+using SalesWebMvc.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,6 +14,10 @@ namespace SalesWebMvc.Services
         public ConsultaService(SalesWebMvcContext context)
         {
             _context = context;
+        }
+        public List<Consulta>FindAll()
+        {
+            return _context.Consulta.Include(obj => obj.Especialista).Include(obj =>obj.Cliente).ToList();
         }
     }
 }

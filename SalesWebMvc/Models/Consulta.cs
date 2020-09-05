@@ -11,16 +11,22 @@ namespace SalesWebMvc.Models
     {
         public int Id { get; set; }
 
-        [Display(Name = "Data e Hora")]
+        [Required(ErrorMessage ="{0} Obrigatório")]
+
+        [Display(Name = "Data e Hora")]//descrição
         [DataType(DataType.DateTime)]
-        [DisplayFormat(DataFormatString ="{0: dd/MM/yyyy HH:mm}")]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0: MM/dd/yyyy HH:mm}")]
         public DateTime Data { get; set; }
 
+        [Required(ErrorMessage = "{0} Obrigatório")]
         [Display(Name ="Status do Pagamento")]
         public StatusPagamento StatusPagamento { get; set; }
         public string Comentario { get; set; }
+
+        [Required(ErrorMessage ="{0} Obrigatório")]
         [Display(Name ="Doutor")]
         public Especialista Especialista{ get; set; }
+        public int EspecialistaId { get; set; }
         public Cliente Cliente { get; set; }
         public Consulta()
         {

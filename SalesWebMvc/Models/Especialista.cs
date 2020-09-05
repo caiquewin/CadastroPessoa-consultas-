@@ -12,20 +12,21 @@ namespace SalesWebMvc.Models
     {
         public int Id { get; set; }
 
-        [Required(ErrorMessage ="{0} Obrigatório")]
         [Display(Name = "Numero Do Cro")]//Nome Exibido pro usuário
+        [Required(ErrorMessage ="{0} Obrigatório")]
+        [Range(00001,9999,ErrorMessage ="{0} O Cro precisa esta entre {1} e {2}")]
         public int Cro { get; set; }
 
-        [Required(ErrorMessage ="{0} Obrigatório")]
         [Display(Name = "Estado do Cro")]
         [StringLength(2,MinimumLength =2,ErrorMessage ="{0} Coloque o estado que foi retirado seu Cro")]
+        [Required(ErrorMessage ="{0} Obrigatório")]
         public string CroEstado { get; set; }
 
         [Required(ErrorMessage = "{0} Obrigatório")]
         public string Nome { get; set; }
 
-        [Required]
         [Display(Name ="Especialidade")]
+        [Required(ErrorMessage ="{0} Obrigado")]
         public Departamento Departamento { get; set; }
         public int DepartamentoId { get; set; }
         public ICollection<Consulta> Consultas { get; set; } = new List<Consulta>();

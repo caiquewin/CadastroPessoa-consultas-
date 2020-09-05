@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using SalesWebMvc.Data;
 using SalesWebMvc.Models;
+using SalesWebMvc.Models.ViewModels;
 using SalesWebMvc.Services;
 
 namespace SalesWebMvc.Controllers
@@ -32,6 +33,12 @@ namespace SalesWebMvc.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Create(Cliente cliente)
         {
+            if (!ModelState.IsValid)
+            {
+                var clien = _clienteService.FindAll();
+                var viewModel = new EspecialistaFormViewModel { Cliente=clien };
+                return View(viewModel);
+            }
             _clienteService.Insert(cliente);
             return RedirectToAction(nameof(Index));
             

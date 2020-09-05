@@ -1,18 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Authentication;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using SalesWebMvc.Data;
 using SalesWebMvc.Models;
+using SalesWebMvc.Models.ViewModels;
+using SalesWebMvc.Services;
 
 namespace SalesWebMvc.Controllers
 {
     public class ConsultasController : Controller
     {
         private readonly SalesWebMvcContext _context;
+        private readonly EspecialistaService _especialistaService;
+        private readonly ClienteService _clienteService;
 
         public ConsultasController(SalesWebMvcContext context)
         {
@@ -56,13 +61,15 @@ namespace SalesWebMvc.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Data,StatusPagamento,Comentario")] Consulta consulta)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
-                _context.Add(consulta);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+               // var Con = _consultaService.FindAll();
+                //var viewModel = new EspecialistaFormViewModel { Consultas =Con };
+                return View(RedirectToAction(nameof(Index)));
             }
-            return View(consulta);
+            _context.Add(consulta);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
         }
 
         // GET: Consultas/Edit/5
@@ -88,6 +95,10 @@ namespace SalesWebMvc.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Data,StatusPagamento,Comentario")] Consulta consulta)
         {
+            if (!ModelState.IsValid)
+            {
+                return View(consulta);
+            }
             if (id != consulta.Id)
             {
                 return NotFound();

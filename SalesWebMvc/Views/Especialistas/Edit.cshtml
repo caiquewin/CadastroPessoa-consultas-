@@ -12,17 +12,20 @@
     <div class="col-md-4">
         <form asp-action="Edit">
             <div class="form-group">
-                <input type="hidden" asp-for="Especialista.Id"/> 
+                <input type="hidden" asp-for="Especialista.Id" />
                 <label asp-for="Especialista.Nome" class="control-label"></label>
                 <input asp-for="Especialista.Nome" class="form-control" />
+                <span asp-validation-for="Especialista.Nome" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Especialista.Cro" class="control-label"></label>
                 <input asp-for="Especialista.Cro" class="form-control" />
+                <span asp-validation-for="Especialista.Cro" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Especialista.CroEstado" class="control-label"></label>
                 <input asp-for="Especialista.CroEstado" class="form-control" />
+                <span asp-validation-for="Especialista.CroEstado" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Especialista.DepartamentoId" class="control-label"></label>
@@ -35,3 +38,6 @@
         </form>
     </div>
 </div>
+@section Scripts {
+@{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
