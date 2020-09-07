@@ -9,7 +9,7 @@
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Create">
-            <!-- <div asp-validation-summary="All" class="text-danger"></div>-->
+           <div asp-validation-summary="All" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="Consulta.ClienteId" class="control-label"></label>
                 <select asp-for="Consulta.ClienteId" asp-items="@(new SelectList(Model.Cliente,"Id","Nome"))" class="form-control">
@@ -23,8 +23,13 @@
             <div class="form-group">
                 <label asp-for="Consulta.Data" class="control-label"></label>
                 <input asp-for="Consulta.Data" class="form-control" />
-                <!--<span asp-validation-for="Data" class="text-danger"></span>-->
+                <span asp-validation-for="Consulta.Data" class="text-danger"></span>
+                </div>
 
+                <div class="form-group">
+                    <label asp-for="Consulta.StatusPagamento" class="control-label"></label>
+                    <select asp-for="Consulta.StatusPagamento" asp-items="Html.GetEnumSelectList<SalesWebMvc.Models.Enums.StatusPagamento>()" class="form-control">
+                    </select>
             </div>
             <!-- <div class="form-group">
              <label asp-for="StatusPagamento" class="control-label"></label>
@@ -34,7 +39,7 @@
             <div class="form-group">
                 <label asp-for="Consulta.Comentario" class="control-label"></label>
                 <input asp-for="Consulta.Comentario" class="form-control" />
-                <!--<span asp-validation-for="Comentario" class="text-danger"></span>-->
+                <span asp-validation-for="Consulta.Comentario" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Enviar" class="btn btn-default" />

@@ -36,10 +36,6 @@ namespace SalesWebMvc.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Create(Especialista especialista)
         {
-            if (!ModelState.IsValid)
-            {
-                return View(especialista);
-            }
             _especialistaService.Insert(especialista);
             return RedirectToAction(nameof(Index));
         }

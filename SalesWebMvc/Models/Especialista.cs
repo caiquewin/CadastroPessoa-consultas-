@@ -12,16 +12,16 @@ namespace SalesWebMvc.Models
     {
         public int Id { get; set; }
 
-        [Display(Name = "Numero Do Cro")]//Nome Exibido pro usuário
+        [Display(Name = "Número Do Cro")]//Nome Exibido pro usuário
         [Required(ErrorMessage ="{0} Obrigatório")]
-        [Range(00001,9999,ErrorMessage ="{0} O Cro precisa esta entre {1} e {2}")]
+        [Range(1,99999,ErrorMessage ="{0} O Cro precisa esta entre {1} eté {2}")]
         public int Cro { get; set; }
 
         [Display(Name = "Estado do Cro")]
         [StringLength(2,MinimumLength =2,ErrorMessage ="{0} Coloque o estado que foi retirado seu Cro")]
         [Required(ErrorMessage ="{0} Obrigatório")]
         public string CroEstado { get; set; }
-
+        [Display(Name ="Nome do Doutor")]
         [Required(ErrorMessage = "{0} Obrigatório")]
         public string Nome { get; set; }
 

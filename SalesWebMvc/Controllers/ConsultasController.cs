@@ -66,8 +66,14 @@ namespace SalesWebMvc.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Create(Consulta consulta)
         {
-            _consultaService.Insert(consulta); ;
+            _consultaService.Insert(consulta); 
             return RedirectToAction(nameof(Index));
+        }
+
+        public IActionResult Delete(int? id)
+        {
+            var obj = _consultaService.FindById(id.Value);
+            return View(obj);
         }
         // POST: Consultas/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
@@ -161,17 +167,24 @@ namespace SalesWebMvc.Controllers
         }
         */
         // POST: Consultas/Delete/5
-        /*[HttpPost, ActionName("Delete")]
+        [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var consulta = await _context.Consulta.FindAsync(id);
-            _context.Consulta.Remove(consulta);
-            await _context.SaveChangesAsync();
+            _consultaService.Remove(id);
             return RedirectToAction(nameof(Index));
         }
-
-        private bool ConsultaExists(int id)
+        public IActionResult Details(int? id)
+        {
+             var obj = _consultaService.FindById(id.Value);
+            return View(obj);
+        }
+        public IActionResult Edit(int? id)
+        {
+            var obj = _consultaService.FindById(id.Value);
+            return View(obj);
+        }
+        /*private bool ConsultaExists(int id)
         {
             return _context.Consulta.Any(e => e.Id == id);
 

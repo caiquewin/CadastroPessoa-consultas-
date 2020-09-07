@@ -10,7 +10,6 @@ namespace SalesWebMvc.Models
     public class Departamento
     {
         public int Id { get; set; }
-
         [Required(ErrorMessage = "{0} Obrigatório")]
         [StringLength(20,MinimumLength =2, ErrorMessage ="{0} está acima de 15 Letras")]
         public String Nome { get; set; }
