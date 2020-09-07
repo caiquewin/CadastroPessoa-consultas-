@@ -34,5 +34,10 @@ namespace SalesWebMvc.Services
         {
             return _context.Consulta.Include(obj => obj.Cliente).Include(obj => obj.Especialista).FirstOrDefault(obj => obj.Cliente.Id == id);
         }
+        public void Update(Consulta obj)
+        {
+            _context.Update(obj);
+            _context.SaveChanges();
+        }
     }
 }

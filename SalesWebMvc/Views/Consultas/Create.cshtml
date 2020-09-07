@@ -1,7 +1,7 @@
-﻿@model SalesWebMvc.Models.ViewModels.ConsultaFormViewModel;
+﻿@model SalesWebMvc.Models.ViewModels.ConsultaFormViewModel
 
 @{
-    ViewData["Title"] = "Nova Consulta";
+    ViewData["Title"] = "Editar";
 }
 
 <h2>@ViewData["Title"]</h2>
@@ -31,11 +31,6 @@
                     <select asp-for="Consulta.StatusPagamento" asp-items="Html.GetEnumSelectList<SalesWebMvc.Models.Enums.StatusPagamento>()" class="form-control">
                     </select>
             </div>
-            <!-- <div class="form-group">
-             <label asp-for="StatusPagamento" class="control-label"></label>
-             <select asp-for="StatusPagamento" class="form-control"></select>
-             <span asp-validation-for="StatusPagamento" class="text-danger"></span>
-    </div>-->
             <div class="form-group">
                 <label asp-for="Consulta.Comentario" class="control-label"></label>
                 <input asp-for="Consulta.Comentario" class="form-control" />

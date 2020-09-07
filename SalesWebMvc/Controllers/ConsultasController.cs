@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.VisualStudio.Web.CodeGeneration.Contracts.Messaging;
 using SalesWebMvc.Data;
 using SalesWebMvc.Models;
 using SalesWebMvc.Models.ViewModels;
@@ -181,9 +182,24 @@ namespace SalesWebMvc.Controllers
         }
         public IActionResult Edit(int? id)
         {
-            var obj = _consultaService.FindById(id.Value);
-            return View(obj);
+            var obj = _consultaService.FindById(id.Value);//iremos procurar se existe a id da consulta
+
+            List<Especialista> especialistas= _especialistaService.FindAll();   //vamos refazer a lista de  todo especialistas
+           
+            List<Cliente> clientes = _clienteService.FindAll();                 //vamos refazer a lista de  todo cliente
+           
+            ConsultaFormViewModel viewModel = new ConsultaFormViewModel {Consulta =obj, Especialista = especialistas, Cliente = clientes };
+            return View(viewModel);
         }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Edit(Consulta consulta)
+        {
+                _consultaService.Update(consulta);
+                return RedirectToAction(nameof(Index));
+            
+        }
+
         /*private bool ConsultaExists(int id)
         {
             return _context.Consulta.Any(e => e.Id == id);

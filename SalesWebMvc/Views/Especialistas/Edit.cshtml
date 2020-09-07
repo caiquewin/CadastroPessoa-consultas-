@@ -4,8 +4,6 @@
     ViewData["Title"] = "Editar";
 }
 
-<h2>Adicionar um novo especialista</h2>
-
 <h4>Editar</h4>
 <hr />
 <div class="row">
@@ -38,6 +36,7 @@
         </form>
     </div>
 </div>
+<div asp-action="Index">Voltar</div>
 @section Scripts {
 @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }

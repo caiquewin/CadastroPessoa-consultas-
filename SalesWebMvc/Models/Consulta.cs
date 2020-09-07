@@ -25,8 +25,10 @@ namespace SalesWebMvc.Models
 
         [Required(ErrorMessage = "{0} Obrigatório")]
         public Especialista Especialista { get; set; }
+        [Display(Name ="Doutor")]
         public int EspecialistaId { get; set; }
         public Cliente Cliente { get; set; }
+        [Display(Name ="Paciênte")]
         public int ClienteId { get; set; }
         public Consulta()
         {
