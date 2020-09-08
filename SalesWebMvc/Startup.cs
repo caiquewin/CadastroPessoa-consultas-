@@ -45,7 +45,7 @@ namespace SalesWebMvc
                         builder.MigrationsAssembly("SalesWebMvc")));
             services.AddScoped<SeedingService>();// injeção de dependencia da nossa "SeedingService"
             services.AddScoped<EspecialistaService>();// Injeção d dependência da nossa classe ClienteService
-            services.AddScoped<ClienteService>();
+            services.AddScoped<ClienteService>(); 
             services.AddScoped<ConsultaService>();
             services.AddScoped<DepartamentoService>();
         }
@@ -54,13 +54,13 @@ namespace SalesWebMvc
         public void Configure(IApplicationBuilder app, IHostingEnvironment env,SeedingService  seedingService)
         {
             var enUs = new CultureInfo("en-Us");
-            var localizationOption = new RequestLocalizationOptions
+            var localizationOptions = new RequestLocalizationOptions
             {
                 DefaultRequestCulture = new RequestCulture(enUs),
                 SupportedCultures = new List<CultureInfo> { enUs },
                 SupportedUICultures = new List<CultureInfo> { enUs }
             };
-            app.UseRequestLocalization(localizationOption);
+            app.UseRequestLocalization(localizationOptions);//definando local padrão estados unidos
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();

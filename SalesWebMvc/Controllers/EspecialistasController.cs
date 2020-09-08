@@ -36,6 +36,12 @@ namespace SalesWebMvc.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Create(Especialista especialista)
         {
+            if (!ModelState.IsValid)
+            {
+                var departamentos = _departamentoService.FindAll();
+                var viewModel = new EspecialistaFormViewModel { Departamento = departamentos };
+                return View(viewModel);  
+            }
             _especialistaService.Insert(especialista);
             return RedirectToAction(nameof(Index));
         }
@@ -75,6 +81,7 @@ namespace SalesWebMvc.Controllers
         }
         public IActionResult Edit(int? id)
         {
+
              if(id == null)
             {
                 return RedirectToAction(nameof(Error),new { message = "id not provided" });
@@ -92,6 +99,10 @@ namespace SalesWebMvc.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Edit(int id,Especialista especialista)
         {
+            if (!ModelState.IsValid)
+            {
+                return View(especialista);
+            }
             if   (id != especialista.Id)
             {
                 return RedirectToAction(nameof(Error),new {message="id mismatch" });
