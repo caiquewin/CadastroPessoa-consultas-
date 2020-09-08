@@ -17,36 +17,37 @@ namespace SalesWebMvc.Services
         {
             _contex = context;
         }
-        public List<Especialista> FindAll()//operação sincrona 
+        public async Task<List<Especialista>> FindAllAsync()//operação sincrona 
         {
-            return _contex.Especialista.Include(obj =>obj.Departamento).ToList();
+            return await _contex.Especialista.Include(obj =>obj.Departamento).ToListAsync();
         }
 
-       public void Insert(Especialista obj)//adiciona um novo Especialista do Create.cshtml dela envia pra esse metodo e vai pro BD
+       public async Task InsertAsync(Especialista obj)//adiciona um novo Especialista do Create.cshtml dela envia pra esse metodo e vai pro BD
         {
             _contex.Add(obj);
-            _contex.SaveChanges();
+           await _contex.SaveChangesAsync();
         }
-        public Especialista FindById(int Id)
+        public async Task<Especialista> FindByIdAsync(int Id)
         {
-            return _contex.Especialista.Include(obj =>obj.Departamento).FirstOrDefault(obj => obj.Id == Id);
+            return await _contex.Especialista.Include(obj =>obj.Departamento).FirstOrDefaultAsync(obj => obj.Id == Id);
         }
-        public void Remove(int Id)
+        public async Task RemoveAsync(int Id)
         {
-            var obj = _contex.Especialista.Find(Id);
+            var obj  = await _contex.Especialista.FindAsync(Id);
             _contex.Especialista.Remove(obj);
-            _contex.SaveChanges();
+            await _contex.SaveChangesAsync();
         }
-        public void Update(Especialista obj)
+        public async Task UpdateAsync(Especialista obj)
         {
-            if(!_contex.Especialista.Any(x => x.Id == obj.Id))// verificando se tem algum usuário com esse id no bd
+            bool hasAny = await _contex.Especialista.AnyAsync(x => x.Id == obj.Id);// verificando se tem algum usuário com esse id no bd
+            if (!hasAny)
             {
                 throw new NotFoundException("Usuario não encontrado");
             }
             try
             {
                 _contex.Update(obj);
-                _contex.SaveChanges();
+               await _contex.SaveChangesAsync();
             }
             catch (DbConcurrencyException e)
             {

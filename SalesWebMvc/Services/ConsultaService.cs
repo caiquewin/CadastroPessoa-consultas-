@@ -1,9 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using SalesWebMvc.Data;
 using SalesWebMvc.Models;
+using SalesWebMvc.Services.Exceptions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace SalesWebMvc.Services
 {
@@ -15,29 +17,42 @@ namespace SalesWebMvc.Services
             _context = context;
         }
 
-        public List<Consulta> FindAll()
+        public async Task<List<Consulta>> FindAllAsync()
         {
-            return _context.Consulta.Include(obj => obj.Especialista).Include(obj => obj.Cliente).ToList();
+            return await _context.Consulta.Include(obj => obj.Especialista).Include(obj => obj.Cliente).ToListAsync();
         }
-        public void Insert(Consulta obj)
+        public async Task InsertAsync(Consulta obj)
         {
             _context.Add(obj);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
         }
-        public void Remove(int Id)
+        public async Task RemoveAsync(int Id)
         {
-            var obj = _context.Consulta.Find(Id);
+            var obj = await _context.Consulta.FindAsync(Id);
             _context.Consulta.Remove(obj);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
         }
-        public Consulta FindById(int id )
+        public async Task<Consulta> FindByIdAsync(int id)
         {
-            return _context.Consulta.Include(obj => obj.Cliente).Include(obj => obj.Especialista).FirstOrDefault(obj => obj.Cliente.Id == id);
+            return await _context.Consulta.Include(obj => obj.Cliente).Include(obj => obj.Especialista).FirstOrDefaultAsync(obj => obj.Cliente.Id == id);
         }
-        public void Update(Consulta obj)
+        public async Task UpdateAsync(Consulta obj)
         {
-            _context.Update(obj);
-            _context.SaveChanges();
+            bool hasAny = await _context.Consulta.AnyAsync(x => x.Id == obj.Id);// verificando se tem algum usuário com esse id no bd
+            if (!hasAny)
+            {
+                throw new NotFoundException("Usuario não encontrado");
+            }
+            try
+            {
+                _context.Update(obj);
+                await _context.SaveChangesAsync();
+            }
+            catch (DbConcurrencyException e)
+            {
+
+                throw new DbConcurrencyException(e.Message);
+            }
         }
     }
 }

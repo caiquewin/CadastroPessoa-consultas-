@@ -28,183 +28,81 @@ namespace SalesWebMvc.Controllers
             _especialistaService = especialistaService;
         }
 
-        // GET: Consultas
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            // return View(await Consulta.Include(obj =>obj.Especialista).Include(cli =>cli.Cliente).ToListAsync());
-            var list = _consultaService.FindAll();
+            var list = await _consultaService.FindAllAsync();
             return View(list);
         }
 
-        // GET: Consultas/Details/5
-        /*public async Task<IActionResult> Details(int? id)
+        public async Task<IActionResult> Create()
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var consulta = await _context.Consulta
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (consulta == null)
-            {
-                return NotFound();
-            }
-
-            return View(consulta);
-        }*/
-
-        // GET: Consultas/Create
-        public IActionResult Create()
-        {
-            var especialistas = _especialistaService.FindAll();
-            var clientes = _clienteService.FindAll();
+            
+            var especialistas = await _especialistaService.FindAllAsync();
+            var clientes = await _clienteService.FindAllAsync();
             var viewModel = new ConsultaFormViewModel { Especialista = especialistas, Cliente=clientes };
             return View(viewModel);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(Consulta consulta)
+        public async Task<IActionResult> Create(Consulta consulta)
         {
-            _consultaService.Insert(consulta); 
+
+            if (!ModelState.IsValid)//validação do JavaScript estiver desabilitado
+            {
+                var cliente = await _clienteService.FindAllAsync();
+                var especialisa = await _especialistaService.FindAllAsync();
+                var viewModel = new ConsultaFormViewModel { Cliente = cliente, Especialista = especialisa,Consulta=consulta};
+                return View(viewModel);
+            }
+             await _consultaService.InsertAsync(consulta); 
             return RedirectToAction(nameof(Index));
         }
 
-        public IActionResult Delete(int? id)
+        public async Task<IActionResult> Delete(int? id)
         {
-            var obj = _consultaService.FindById(id.Value);
+            var obj = await _consultaService.FindByIdAsync(id.Value);
             return View(obj);
         }
-        // POST: Consultas/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        /*  [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Data,StatusPagamento,Comentario")] Consulta consulta)
-          {
-              if (!ModelState.IsValid)
-              {
-                 // var Con = _consultaService.FindAll();
-                  //var viewModel = new EspecialistaFormViewModel { Consultas =Con };
-                  return View(RedirectToAction(nameof(Index)));
-              }
-              _consultaService.Insert(consulta);
-              await _context.SaveChangesAsync();
-              return RedirectToAction(nameof(Index));
-          }*/
-
-        // GET: Consultas/Edit/5
-        /*public async Task<IActionResult> Edit(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var consulta = await _context.Consulta.FindAsync(id);
-            if (consulta == null)
-            {
-                return NotFound();
-            }
-            return View(consulta);
-        }*/
-
-        // POST: Consultas/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        /* [HttpPost]
-         [ValidateAntiForgeryToken]
-         public async Task<IActionResult> Edit(int id, [Bind("Id,Data,StatusPagamento,Comentario")] Consulta consulta)
-         {
-             if (!ModelState.IsValid)
-             {
-                 return View(consulta);
-             }
-             if (id != consulta.Id)
-             {
-                 return NotFound();
-             }
-
-             if (ModelState.IsValid)
-             {
-                 try
-                 {
-                     _context.Update(consulta);
-                     await _context.SaveChangesAsync();
-                 }
-                 catch (DbUpdateConcurrencyException)
-                 {
-                     if (!ConsultaExists(consulta.Id))
-                     {
-                         return NotFound();
-                     }
-                     else
-                     {
-                         throw;
-                     }
-                 }
-                 return RedirectToAction(nameof(Index));
-             }
-             return View(consulta);
-         }*/
-
-        // GET: Consultas/Delete/5
-        /*public async Task<IActionResult> Delete(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var consulta = await _context.Consulta
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (consulta == null)
-            {
-                return NotFound();
-            }
-
-            return View(consulta);
-        }
-        */
-        // POST: Consultas/Delete/5
+       
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            _consultaService.Remove(id);
+            await _consultaService.RemoveAsync(id);
             return RedirectToAction(nameof(Index));
         }
-        public IActionResult Details(int? id)
+        public async Task<IActionResult> Details(int? id)
         {
-             var obj = _consultaService.FindById(id.Value);
+             var obj = await _consultaService.FindByIdAsync(id.Value);
             return View(obj);
         }
-        public IActionResult Edit(int? id)
+        public async Task<IActionResult> Edit(int? id)
         {
-            var obj = _consultaService.FindById(id.Value);//iremos procurar se existe a id da consulta
+            var obj = await _consultaService.FindByIdAsync(id.Value);//iremos procurar se existe a id da consulta
 
-            List<Especialista> especialistas= _especialistaService.FindAll();   //vamos refazer a lista de  todo especialistas
+            List<Especialista> especialistas= await _especialistaService.FindAllAsync();//vamos refazer a lista de  todo especialistas
            
-            List<Cliente> clientes = _clienteService.FindAll();                 //vamos refazer a lista de  todo cliente
+            List<Cliente> clientes = await _clienteService.FindAllAsync(); //vamos refazer a lista de  todo cliente
            
             ConsultaFormViewModel viewModel = new ConsultaFormViewModel {Consulta =obj, Especialista = especialistas, Cliente = clientes };
             return View(viewModel);
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(Consulta consulta)
+        public async Task<IActionResult> Edit(Consulta consulta)
         {
-                _consultaService.Update(consulta);
+            if (!ModelState.IsValid)//validação do JavaScript estiver desabilitado
+            {
+                var cliente = await _clienteService.FindAllAsync();
+                var especialisa =await _especialistaService.FindAllAsync();
+                var viewModel = new ConsultaFormViewModel { Cliente = cliente, Especialista = especialisa, Consulta = consulta };
+                return View(viewModel);
+            }
+           await _consultaService.UpdateAsync(consulta);
                 return RedirectToAction(nameof(Index));
             
         }
-
-        /*private bool ConsultaExists(int id)
-        {
-            return _context.Consulta.Any(e => e.Id == id);
-
-        }*/
     }
 }
 

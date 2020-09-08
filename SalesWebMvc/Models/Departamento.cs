@@ -15,7 +15,7 @@ namespace SalesWebMvc.Models
         public String Nome { get; set; }
 
         [Display(Name ="Salário")]//definando o campo de leitura pro user
-        [Range(980.00,9999.99, ErrorMessage ="{0} precisa está entre {1} até {2}")]
+        [Range(980.0,10000.00, ErrorMessage ="{0} precisa está entre {1} até {2}")]
         [DisplayFormat(DataFormatString ="{0:F2}")]// definindo quantidade de casas decimais
         [Required(ErrorMessage ="{0} Obrigatório")]// definindo que o Salario o campo é obrigatório
         public double Salario { get; set; }

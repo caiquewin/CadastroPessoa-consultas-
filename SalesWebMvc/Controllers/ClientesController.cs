@@ -19,27 +19,27 @@ namespace SalesWebMvc.Controllers
         {
             _clienteService= clienteService;
         }
-        public  IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            var list = _clienteService.FindAll();
+            var list = await _clienteService.FindAllAsync();
             return View(list);
         }
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
             return View();
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(Cliente cliente)
+        public async Task<IActionResult> Create(Cliente cliente)
         {
             if (!ModelState.IsValid)
             {
-                var clien = _clienteService.FindAll();
+                var clien = await _clienteService.FindAllAsync();
                 var viewModel = new ConsultaFormViewModel { Cliente=clien };
                 return View(viewModel);
             }
-            _clienteService.Insert(cliente);
+            await _clienteService.InsertAsync(cliente);
             return RedirectToAction(nameof(Index));
             
 

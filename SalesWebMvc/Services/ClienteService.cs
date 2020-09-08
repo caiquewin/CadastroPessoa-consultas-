@@ -1,4 +1,5 @@
-﻿using SalesWebMvc.Data;
+﻿using Microsoft.EntityFrameworkCore;
+using SalesWebMvc.Data;
 using SalesWebMvc.Models;
 using System;
 using System.Collections.Generic;
@@ -14,19 +15,19 @@ namespace SalesWebMvc.Services
         {
             _context = context;
         }
-        public List<Cliente>FindAll()//operação sicrona
+        public async Task<List<Cliente>> FindAllAsync()//operação sicrona
         {
-            return _context.Cliente.ToList();
+            return await _context.Cliente.ToListAsync();
 
         }
-        public Cliente FindById(int id)
+        public async Task<Cliente> FindByIdAsync(int id)
         {
-            return _context.Cliente.FirstOrDefault(obj => obj.Id == id);
+            return await _context.Cliente.FirstOrDefaultAsync(obj => obj.Id == id);
         }
-        public void Insert(Cliente obj)
+        public async Task InsertAsync(Cliente obj)
         {
             _context.Add(obj);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
         }
     }
 }
