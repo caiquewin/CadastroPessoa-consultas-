@@ -13,6 +13,7 @@ namespace SalesWebMvc.Services
     public class EspecialistaService
     {
         private readonly SalesWebMvcContext _contex;
+        bool veri=false;
         public EspecialistaService(SalesWebMvcContext context)
         {
             _contex = context;
@@ -33,10 +34,22 @@ namespace SalesWebMvc.Services
         }
         public async Task RemoveAsync(int Id)
         {
-            var obj  = await _contex.Especialista.FindAsync(Id);
-            _contex.Especialista.Remove(obj);
-            await _contex.SaveChangesAsync();
+            bool veri = await _contex.Consulta.AnyAsync(obj => obj.Especialista.Id == Id);//se for verdadeira não vai possivel fazer o try
+            if (!veri)
+            {
+                try
+                {
+                    var obj = await _contex.Especialista.FindAsync(Id);
+                    _contex.Especialista.Remove(obj);
+                    await _contex.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException e)
+                {
+                    throw new IntergrityException(e.Message);
+                }
+            }
         }
+       
         public async Task UpdateAsync(Especialista obj)
         {
             bool hasAny = await _contex.Especialista.AnyAsync(x => x.Id == obj.Id);// verificando se tem algum usuário com esse id no bd

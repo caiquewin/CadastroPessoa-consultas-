@@ -19,5 +19,6 @@ namespace SalesWebMvc.Services
         {
             return await _contex.Departamento.OrderBy(x => x.Nome).ToListAsync();
         }
+
     }
 }

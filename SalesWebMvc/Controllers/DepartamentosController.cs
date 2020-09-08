@@ -144,9 +144,12 @@ namespace SalesWebMvc.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var departamento = await _context.Departamento.FindAsync(id);
-            _context.Departamento.Remove(departamento);
-            await _context.SaveChangesAsync();
+            if (!_context.Especialista.Any(OBJ => OBJ.Departamento.Id == id))
+            {
+                var departamento = await _context.Departamento.FindAsync(id);
+                _context.Departamento.Remove(departamento);
+                await _context.SaveChangesAsync();
+            }
             return RedirectToAction(nameof(Index));
         }
 
