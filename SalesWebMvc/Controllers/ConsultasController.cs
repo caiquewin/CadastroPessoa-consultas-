@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Security.Authentication;
 using System.Threading.Tasks;
@@ -74,7 +75,16 @@ namespace SalesWebMvc.Controllers
         }
         public async Task<IActionResult> Details(int? id)
         {
-             var obj = await _consultaService.FindByIdAsync(id.Value);
+            if (id == null)
+            {
+                return RedirectToAction(nameof(Error), new { message = "Id not provided" });
+            }
+                var obj = await _consultaService.FindByIdAsync(id.Value);
+            if(obj==null)
+            {
+                return RedirectToAction(nameof(Error), new { message = "Id not found" });
+
+            }
             return View(obj);
         }
         public async Task<IActionResult> Edit(int? id)
@@ -102,6 +112,16 @@ namespace SalesWebMvc.Controllers
            await _consultaService.UpdateAsync(consulta);
                 return RedirectToAction(nameof(Index));
             
+        }
+        public IActionResult Error(string message)
+        {
+            var viewModel = new ErrorViewModel
+            {
+                Message = message,
+                RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier//aqui estou pegando o Id da requisição
+            };
+            return View(viewModel);
+
         }
     }
 }

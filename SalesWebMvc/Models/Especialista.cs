@@ -24,10 +24,8 @@ namespace SalesWebMvc.Models
         [Display(Name ="Nome do Doutor")]
         [Required(ErrorMessage = "{0} Obrigatório")]
         public string Nome { get; set; }
-
-        [Display(Name ="Especialidade")]
-        [Required(ErrorMessage ="{0} Obrigado")]
         public Departamento Departamento { get; set; }
+        [Display(Name ="Especialidade")]
         public int DepartamentoId { get; set; }
         public ICollection<Consulta> Consultas { get; set; } = new List<Consulta>();
         public Especialista()

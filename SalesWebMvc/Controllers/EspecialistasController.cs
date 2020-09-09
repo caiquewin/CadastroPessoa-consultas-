@@ -41,7 +41,7 @@ namespace SalesWebMvc.Controllers
             {
                 var departamentos = await _departamentoService.FindAllAsync();
                 var viewModel = new EspecialistaFormViewModel { Departamento = departamentos };
-                return View(viewModel);  
+                return View(viewModel);
             }
             await _especialistaService.InsertAsync(especialista);
             return RedirectToAction(nameof(Index));
@@ -50,12 +50,12 @@ namespace SalesWebMvc.Controllers
         {
             if (id == null)
             {
-                return RedirectToAction(nameof(Error),new {message="Id not provided"});
+                return RedirectToAction(nameof(Error), new { message = "Id not provided" });
             }
             var obj = await _especialistaService.FindByIdAsync(id.Value);
             if (obj == null)
             {
-                return RedirectToAction(nameof(Error),new {message ="Id not fund "});
+                return RedirectToAction(nameof(Error), new { message = "Id not fund " });
             }
             return View(obj);
         }
@@ -65,12 +65,8 @@ namespace SalesWebMvc.Controllers
         {
             try
             {
-                
-                    await _especialistaService.RemoveAsync(id);
-                    return RedirectToAction(nameof(Index));
-                
-            
-
+                await _especialistaService.RemoveAsync(id);
+                return RedirectToAction(nameof(Index));
             }
             catch (IntergrityException e)
             {
@@ -82,7 +78,7 @@ namespace SalesWebMvc.Controllers
         {
             if (id == null)
             {
-                return RedirectToAction(nameof(Error), new {message="Id not provided" });
+                return RedirectToAction(nameof(Error), new { message = "Id not provided" });
             }
             var obj = await _especialistaService.FindByIdAsync(id.Value);
             if (obj == null)
@@ -95,22 +91,22 @@ namespace SalesWebMvc.Controllers
         public async Task<IActionResult> Edit(int? id)
         {
 
-             if(id == null)
+            if (id == null)
             {
-                return RedirectToAction(nameof(Error),new { message = "id not provided" });
+                return RedirectToAction(nameof(Error), new { message = "id not provided" });
             }
             var obj = await _especialistaService.FindByIdAsync(id.Value);
-            if(obj == null)
+            if (obj == null)
             {
-                return RedirectToAction(nameof(Error),new { message = "Id not found" });
+                return RedirectToAction(nameof(Error), new { message = "Id not found" });
             }
             List<Departamento> departamentos = await _departamentoService.FindAllAsync();
-            EspecialistaFormViewModel viewModel = new EspecialistaFormViewModel { Especialista = obj, Departamento = departamentos } ;
+            EspecialistaFormViewModel viewModel = new EspecialistaFormViewModel { Especialista = obj, Departamento = departamentos };
             return View(viewModel);
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id,Especialista especialista)
+        public async Task<IActionResult> Edit(int id, Especialista especialista)
         {
             if (!ModelState.IsValid)//validação do JavaScript estiver desabilitado
             {
@@ -118,20 +114,20 @@ namespace SalesWebMvc.Controllers
                 var viewModel = new EspecialistaFormViewModel { Departamento = departamentos };
                 return View(viewModel);
             }
-            if   (id != especialista.Id)
+            if (id != especialista.Id)
             {
-                return RedirectToAction(nameof(Error),new {message="id mismatch" });
+                return RedirectToAction(nameof(Error), new { message = "id mismatch" });
             }
             try
             {
                 await _especialistaService.UpdateAsync(especialista);
                 return RedirectToAction(nameof(Index));
             }
-            catch(ApplicationException e)
+            catch (ApplicationException e)
             {
-                return RedirectToAction(nameof(Error),new {message=e.Message});
+                return RedirectToAction(nameof(Error), new { message = e.Message });
             }
-            
+
         }
         public IActionResult Error(string message)
         {

@@ -21,8 +21,6 @@ namespace SalesWebMvc.Models
         [EnumDataType(typeof(StatusPagamento))]
         public StatusPagamento StatusPagamento { get; set; }
         public string Comentario { get; set; }
-
-        [Required(ErrorMessage = "{0} Obrigatório")]
         public Especialista Especialista { get; set; }
         [Display(Name ="Doutor")]
         public int EspecialistaId { get; set; }

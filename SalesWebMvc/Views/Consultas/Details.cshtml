@@ -5,7 +5,6 @@
 }
 
 <h2>Details</h2>
-
 <div>
     <h4>Consulta</h4>
     <hr />
@@ -35,8 +34,7 @@
             @Html.DisplayFor(model =>model.Cliente.NumeCel)
         </dd>
     </dl>
-</div>
-<div>
-    <a asp-action="Edit" class="btn btn-default"asp-route-id="@Model.Id">Editar</a>
+
+    <a asp-action="Edit" class="btn btn-default" asp-route-id="@Model.Id">Editar</a>
     <a asp-action="Index" class="btn btn-default">Voltar</a>
 </div>

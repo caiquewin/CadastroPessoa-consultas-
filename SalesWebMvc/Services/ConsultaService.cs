@@ -34,7 +34,7 @@ namespace SalesWebMvc.Services
         }
         public async Task<Consulta> FindByIdAsync(int id)
         {
-            return await _context.Consulta.Include(obj => obj.Cliente).Include(obj => obj.Especialista).FirstOrDefaultAsync(obj => obj.Cliente.Id == id);
+            return await _context.Consulta.Include(obj => obj.Cliente).Include(obj => obj.Especialista).FirstOrDefaultAsync(obj => obj.Id == id);
         }
         public async Task UpdateAsync(Consulta obj)
         {
